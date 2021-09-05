@@ -10,7 +10,7 @@ function Login() {
   const [singUpPassword, setSingUpPassword] = useState('');
 
   const [method, setMethod] = useState('signin');
-  const { query } = useLocation();
+  const { state } = useLocation();
 
   const changeToSignUp = () => {
     setMethod('signup');
@@ -29,14 +29,19 @@ function Login() {
   };
 
   useEffect(() => {
-    if (query && query.method) {
-      if (query.method === 'signup') {
+    // Currently "sign in" card is shown on login page.
+    // If user is redirected to "sign up" page(maybe user click on header sign up button) then we need to switch to signup card.
+    // We will send some state in "Link" component to let Login page know about which card to show.
+    if (state && state.method) {
+      if (state.method === 'signup') {
         changeToSignUp();
-      } else if (query.method === 'signin') {
+      } else if (state.method === 'signin') {
+        // Why are we doing this?? we only need to do this for signup card. right?
+        // Nope. Suppose user is on signup card and user presses login button on header. then also we need to show animation
         changeToSignIn();
       }
     }
-  }, [query]);
+  }, [state]);
 
   return (
     <div id="login-container">

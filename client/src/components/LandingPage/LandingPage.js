@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Illustration from '../../assets/landingPageIllustration.svg';
+import Illustration from '../../assets/landingPageIllustration.png';
 
 import './LandingPage.css';
 
@@ -16,7 +16,7 @@ function LandingPage() {
             </div>
             <div className="landing-description">Best platform to solve programming problems.</div>
             <div className="landing-get-started">
-              <Link to={{ pathname: '/login', query: { method: 'signup' } }}>
+              <Link to={{ pathname: '/login', state: {method: 'signup'} }}>
                 <button>Get Started</button>
               </Link>
             </div>

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 function HeaderRight() {
   return (
     <Nav>
-      <Link to={{ pathname: '/login', query: { method: 'signin' } }}>
+      <Link to={{ pathname: '/login', state: { method: 'signin' } }}>
         <button className="header-button header-login-button">Login</button>
       </Link>
-      <Link to={{ pathname: '/login', query: { method: 'signup' } }}>
+      <Link to={{ pathname: '/login', state: { method: 'signup' } }}>
         <button className="header-button header-register-button">Sign up</button>
       </Link>
     </Nav>
