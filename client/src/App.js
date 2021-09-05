@@ -1,15 +1,28 @@
-import "./App.css";
-import Header from "./components/Header";
-import Login from "./components/Login";
-import Footer from "./components/Footer";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import './App.css';
+import './globalStyles.css';
+
+import Header from './components/LayoutComponents/Header';
+import Login from './components/Login/Login';
+import LandingPage from './components/LandingPage/LandingPage';
+import Page404 from './components/Page404';
 
 function App() {
-    return (
-        <div className="App">
-            <Login />
-            <Footer />
+  return (
+    <div className="app">
+      <BrowserRouter>
+        <div className="app-container">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/login" component={Login} />
+            <Route path="*" component={Page404} />
+          </Switch>
         </div>
-    );
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
