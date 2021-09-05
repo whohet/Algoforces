@@ -12,11 +12,11 @@ function LandingPage() {
         <div className="landing-left">
           <div className="landing-left-box">
             <div className="landing-title">
-              Algoforces <span className="landing-title-light">- Online Judge</span>{' '}
+              Algoforces <span className="landing-title-light">- Online Judge</span>
             </div>
             <div className="landing-description">Best platform to solve programming problems.</div>
             <div className="landing-get-started">
-              <Link to={{ pathname: '/login', state: {method: 'signup'} }}>
+              <Link to={{ pathname: '/login', state: { method: 'signup' } }}>
                 <button>Get Started</button>
               </Link>
             </div>

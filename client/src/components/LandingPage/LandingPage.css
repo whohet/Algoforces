@@ -27,7 +27,7 @@
 .landing-title {
   /* font-size: 60px; */
   font-size: calc(20px + 3vw);
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .landing-title-light {
@@ -66,9 +66,6 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-}
-
-.landing-illustration-container {
 }
 
 .landing-illustration-container > img {
