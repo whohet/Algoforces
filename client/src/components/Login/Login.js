@@ -86,7 +86,7 @@ function Login() {
                         <h1>Sign in</h1>
                         <input
                             type="text"
-                            placeholder="Username"
+                            placeholder="Email or Username"
                             required
                             name="username"
                         />

@@ -13,7 +13,7 @@ const userSchema = new Schema(
         timestamps: true,
     }
 );
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, { usernameQueryFields: ["email"] });
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

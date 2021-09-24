@@ -29,7 +29,7 @@ router.route("/login").get((req, res) => {
             if (!user) {
                 res.json({
                     success: false,
-                    message: "Username or Password Incorrect!",
+                    message: "Username or Email or Password is Incorrect!",
                 });
             } else {
                 req.login(user, function (err) {
