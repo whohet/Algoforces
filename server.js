@@ -10,9 +10,16 @@ const PORT = process.env.PORT || 5000;
 
 //-----Passport Start
 const passport = require("passport");
+const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
-
+app.use(
+    session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 passport.use(
     new LocalStrategy(
         {
@@ -22,9 +29,11 @@ passport.use(
         User.authenticate()
     )
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-app.use(passport.initialize());
 //-----Passport Stop
 
 app.use(cors());

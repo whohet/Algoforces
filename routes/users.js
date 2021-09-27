@@ -47,4 +47,23 @@ router.route("/login").get((req, res) => {
     })(req, res);
 });
 
+router.route("/checker").get((req, res) => {
+    if (req.isAuthenticated()) {
+        res.json({
+            message: "Already Authenticated!",
+        });
+    } else {
+        res.json({
+            message: "Please login!",
+        });
+    }
+});
+
+router.route("/logout").get((req, res) => {
+    req.logout();
+    res.json({
+        success: true,
+        message: "Logged out!",
+    });
+});
 module.exports = router;
