@@ -107,6 +107,11 @@
   transition: all 0.6s ease-in-out;
 }
 
+.form-container > .alert {
+  position: absolute;
+  top: 0;
+}
+
 .sign-in-container {
   left: 0;
   width: 50%;

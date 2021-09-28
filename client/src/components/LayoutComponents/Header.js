@@ -3,11 +3,13 @@ import { Container, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import HeaderRoutes from './HeaderRoutes';
 import HeaderRight from './HeaderRight';
-import Logo from './logo192.png';
+import Logo from '../../assets/logo192.png';
+import { useLocation } from 'react-router';
 
 function Header() {
+  const {pathname} = useLocation();
   return (
-    <div id="header-container">
+    <div id="header-container" className={`${pathname === '/' ? 'header-no-bg' : 'header-bg-white'}`}>
       <Navbar collapseOnSelect expand="lg" variant="light">
         <Container>
           <LinkContainer to="/">

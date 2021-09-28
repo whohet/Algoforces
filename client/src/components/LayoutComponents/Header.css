@@ -1,7 +1,13 @@
 #header-container {
-  background-color: white;
-  /* background: none; */
   border-bottom: 1px solid rgba(189, 189, 189, 0.5);
+}
+
+.header-no-bg {
+  background: none;
+}
+
+.header-bg-white {
+  background-color: white;
 }
 
 .navbar {
