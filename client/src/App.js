@@ -11,9 +11,9 @@ import Login from "./components/Login/Login";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Page404 from "./components/Page404";
 import Home from "./components/Home/Home";
-import UserContext from "./components/context/UserContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Problemset from "./components/Problemset/Problemset";
+import UserContext from "./context/UserContext";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

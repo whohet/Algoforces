@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router";
 import { loginAPI, registerAPI } from "../../api/userAuth";
 import { Alert } from "react-bootstrap";
 import "./Login.css";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 function Login() {
   const [singInUsername, setSingInUsername] = useState("harshil");
