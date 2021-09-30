@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const {CLIENT_URL} = require('./config/config');
+const { CLIENT_URL } = require("./config/config");
 require("dotenv").config();
 
 const app = express();
@@ -24,19 +24,21 @@ const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
 const env = process.env.NODE_ENV || "development";
+const sessionOptions = {
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30, // cookie expiry time = 1 month (in milliseconds)
+  },
+};
+console.log(env);
+if (env == "production") {
+  sessionOptions.cookie.sameSite = "none";
+  sessionOptions.cookie.secure = true;
+}
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 30, // cookie expiry time = 1 month (in milliseconds)
-      sameSite: 'none',
-      ...(env === 'production' && {secure: true})
-    },
-  })
-);
+app.use(session(sessionOptions));
 
 passport.use(
   new LocalStrategy(
