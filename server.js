@@ -34,6 +34,7 @@ const sessionOptions = {
 };
 console.log(env);
 if (env == "production") {
+  app.set('trust proxy', 1) // trust first proxy
   sessionOptions.cookie.sameSite = "none";
   sessionOptions.cookie.secure = true;
 }
