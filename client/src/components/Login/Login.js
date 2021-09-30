@@ -6,8 +6,8 @@ import "./Login.css";
 import UserContext from "../../context/UserContext";
 
 function Login() {
-  const [singInUsername, setSingInUsername] = useState("harshil");
-  const [singInPassword, setSingInPassword] = useState("whohetgod");
+  const [singInUsername, setSingInUsername] = useState("");
+  const [singInPassword, setSingInPassword] = useState("");
 
   const [singUpEmail, setSingUpEmail] = useState("");
   const [singUpUsername, setSingUpUsername] = useState("");
@@ -15,7 +15,7 @@ function Login() {
 
   const [method, setMethod] = useState("signin");
   const [successMessage, setSuccessMessage] = useState("");
-  
+
   const userContext = useContext(UserContext);
   const { state } = useLocation();
   const history = useHistory();
