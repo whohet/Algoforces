@@ -23,6 +23,7 @@ const passport = require("passport");
 const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
+const env = process.env.NODE_ENV || "development";
 
 app.use(
   session({
@@ -31,10 +32,11 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 30, // cookie expiry time = 1 month (in milliseconds)
+      sameSite: 'none',
+      ...(env === 'production' && {secure: true})
     },
   })
 );
-app.set('trust proxy', 1)
 
 passport.use(
   new LocalStrategy(
