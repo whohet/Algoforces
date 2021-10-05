@@ -27,7 +27,6 @@ function App() {
     try {
       const res = await isLoggedInAPI();
       if (res.success) {
-        console.log(res.user);
         setIsAuthenticated(true);
         setUserData(res.user);
       }

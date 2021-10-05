@@ -24,7 +24,6 @@ const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
 const env = process.env.NODE_ENV || "development";
-console.log(env);
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET,
