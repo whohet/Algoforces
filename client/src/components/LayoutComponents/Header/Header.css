@@ -73,3 +73,16 @@
   background-color: #b16dff;
   color: #ffffff;
 }
+
+.basic-nav-dropdown > a {
+  display: flex;
+}
+
+.basic-nav-dropdown a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.basic-nav-dropdown > a::after {
+  align-self: center;
+}

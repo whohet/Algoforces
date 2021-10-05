@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algoforces</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .container {
+        margin: 0 auto;
+        max-width: 600px;
+      }
+      .image-container {
+        width: 100%;
+        text-align: center;
+        background-color: white;
+      }
+      .verify-button-container {
+        text-align: center;
+      }
+      .verify-button {
+        padding: 7px 16px;
+        color: #ffffff;
+        background-color: #8c30f5;
+        box-shadow: 0 10px 30px 0px rgba(140, 48, 245, 0.2);
+        border-radius: 3px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+      }
+      .verify-button:hover {
+        background-color: #b16dff;
+        color: #ffffff;
+      }
+      .ignore-mail-text {
+        color: grey;
+        font-size: 0.95em;
+      }
+      .regards {
+        margin-top: 20px;
+      }
+      .regards > p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="image-container">
+        <img src="cid:logo" width="150px" height="150px" />
+      </div>
+      <div class="content">
+        <div class="mail-details">
+          <p>Hi {{username}},</p>
+          <p>
+            Thanks for creating your Algoforces account! Before we get started, we need to verify your email
+            address. Please click on below button to verify your email address
+          </p>
+        </div>
+        <div class="verify-button-container">
+          <a href="{{verifyUrl}}">
+            <button class="verify-button">CONFIRM MY EMAIL</button>
+          </a>
+        </div>
+        <div class="ignore-mail-text">If this account was not created by you, please ignore this mail.</div>
+
+        <div class="regards">
+          <p>Kind regards,</p>
+          <p>Algoforces Team</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    isConfirmed: {
+      type: Boolean,
+      default: false,
+    },
+    avatarUrl: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

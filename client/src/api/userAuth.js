@@ -22,3 +22,12 @@ export const isLoggedInAPI = async () => {
   });
   return res.data;
 };
+
+export const logoutAPI = async () => {
+  await axios.get(`${SERVER_URL}/users/logout`, { withCredentials: true });
+};
+
+export const forgotPasswordAPI = async (email) => {
+  const res = await axios.post(`${SERVER_URL}/users/forgotpassword`, { email });
+  return res.data;
+};

@@ -24,6 +24,8 @@ const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
 const env = process.env.NODE_ENV || "development";
+console.log(env);
+
 const sessionOptions = {
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -32,13 +34,11 @@ const sessionOptions = {
     maxAge: 1000 * 60 * 60 * 24 * 30, // cookie expiry time = 1 month (in milliseconds)
   },
 };
-console.log(env);
 if (env == "production") {
-  app.set('trust proxy', 1) // trust first proxy
+  app.set("trust proxy", 1); // trust first proxy
   sessionOptions.cookie.sameSite = "none";
   sessionOptions.cookie.secure = true;
 }
-
 app.use(session(sessionOptions));
 
 passport.use(
@@ -53,10 +53,21 @@ passport.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static("./"));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser((user, done) => {
+  const sessionUser = { _id: user._id, username: user.username, email: user.email };
+  done(null, sessionUser);
+});
+passport.deserializeUser((sessionUser, done) => {
+  done(null, sessionUser);
+});
 // ----- Passport End -----
+
+// ----- Routes Start -----
+const userRouter = require("./routes/userRouter");
+app.use("/users", userRouter);
+// ----- Routes End -----
 
 // ----- MongoDB Connect Start -----
 const uri = process.env.ATLAS_URI;
@@ -67,11 +78,6 @@ mongoose
   })
   .catch((err) => console.log(err));
 // ----- MongoDB Connect End -----
-
-// ----- Routes Start -----
-const userRouter = require("./routes/userRouter");
-app.use("/users", userRouter);
-// ----- Routes End -----
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

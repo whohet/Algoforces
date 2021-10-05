@@ -6,14 +6,17 @@ import "./globalStyles.css";
 
 import { isLoggedInAPI } from "./api/userAuth";
 
-import Header from "./components/LayoutComponents/Header";
-import Login from "./components/Login/Login";
-import LandingPage from "./components/LandingPage/LandingPage";
-import Page404 from "./components/Page404";
-import Home from "./components/Home/Home";
+import Header from "./components/LayoutComponents/Header/Header";
 import PrivateRoute from "./components/PrivateRoute";
+import Page404 from "./components/Page404";
+import LandingPage from "./components/LandingPage/LandingPage";
+import Login from "./components/Auth/Login";
+import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
+import Home from "./components/Home/Home";
 import Problemset from "./components/Problemset/Problemset";
+
 import UserContext from "./context/UserContext";
+import Loading from "./components/utils/Loading/Loading";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,8 +27,9 @@ function App() {
     try {
       const res = await isLoggedInAPI();
       if (res.success) {
+        console.log(res.user);
         setIsAuthenticated(true);
-        setUserData({ username: "temp_name" });
+        setUserData(res.user);
       }
     } catch (err) {}
     setLoading(false);
@@ -36,7 +40,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -48,6 +52,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/problemset" component={Problemset} />
               <Route path="*" component={Page404} />
