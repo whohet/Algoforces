@@ -17,6 +17,7 @@ import Problemset from "./components/Problemset/Problemset";
 
 import UserContext from "./context/UserContext";
 import Loading from "./components/utils/Loading/Loading";
+import CreateProblem from "./components/CreateProblem/CreateProblem";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -54,6 +55,7 @@ function App() {
               <Route exact path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/problemset" component={Problemset} />
+              <Route exact path="/create" component={CreateProblem} />
               <Route path="*" component={Page404} />
             </Switch>
           </div>

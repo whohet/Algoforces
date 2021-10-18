@@ -1,0 +1,36 @@
+export const problemTags = [
+  { value: "math", label: "Math" },
+  { value: "greedy", label: "Greedy" },
+  { value: "string", label: "String" },
+  { value: "hashing", label: "Hashing" },
+  { value: "sorting", label: "Sorting" },
+  { value: "searching", label: "Searching" },
+  { value: "binary_search", label: "Binary Search" },
+  { value: "recursion", label: "Recursion" },
+  { value: "number_theory", label: "Number Theory" },
+  { value: "dp", label: "Dynamic Programming" },
+
+  { value: "array", label: "Array" },
+  { value: "linked_list", label: "Linked List" },
+  { value: "stack", label: "Stack" },
+  { value: "queue", label: "Queue" },
+  { value: "tree", label: "Tree" },
+  { value: "binary_search_tree", label: "Binary Search Tree" },
+  { value: "graph", label: "Graph" },
+  { value: "dfs", label: "Depth First Search" },
+  { value: "bfs", label: "Breadth First Search" },
+
+  { value: "prefix_sum", label: "Prefix Sum" },
+  { value: "two_pointer", label: "Two Pointer" },
+  { value: "back_tracking", label: "Backtracking" },
+  { value: "bit_manipulation", label: "Bit Manipulation" },
+  { value: "divide_and_conquer", label: "Divide and Conquer" },
+
+  { value: "dsu", label: "Disjoint Set Union" },
+  { value: "trie", label: "Trie" },
+  { value: "segment_tree", label: "Segment Tree" },
+  { value: "binary_indexed_tree", label: "Binary Indexed Tree" },
+
+  { value: "geometry", label: "Geometry" },
+  { value: "game_theory", label: "Game Theory" },
+];

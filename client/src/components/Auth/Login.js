@@ -3,12 +3,12 @@ import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 import UserContext from "../../context/UserContext";
+import useToast from "../../customHooks/useToast/useToast";
+import useLoader from "../../customHooks/useLoader/useLoader";
+
 import { loginAPI, registerAPI } from "../../api/userAuth";
 
-import useToast from "../../customHooks/useToast/useToast";
-
 import "./Login.css";
-import useLoader from "../../customHooks/useLoader/useLoader";
 
 function Login() {
   const [singInUsername, setSingInUsername] = useState("");
@@ -64,7 +64,12 @@ function Login() {
     e.preventDefault();
     showLoader();
     try {
-      const userData = { email: singUpEmail, username: singUpUsername, password: singUpPassword, confirmPassword: signUpConfirmPassword };
+      const userData = {
+        email: singUpEmail,
+        username: singUpUsername,
+        password: singUpPassword,
+        confirmPassword: signUpConfirmPassword,
+      };
       await registerAPI(userData);
       toast.success(
         "Account Registered successfully. Please check your mail to confirm email address. Also make sure to check spam folder."
@@ -72,6 +77,8 @@ function Login() {
     } catch (err) {
       if (err && err.response && err.response.data) {
         toast.error(err.response.data.message);
+      } else {
+        toast.error("Internal server error. Please try again.");
       }
     }
     hideLoader();
@@ -79,11 +86,12 @@ function Login() {
 
   useEffect(() => {
     // Search contains URL query parameters. like "?emailConfirm=true"
-    // So we will show message to user that their email is confirmed. 
+    // So we will show message to user that their email is confirmed.
     if (search.includes("?emailConfirm=true")) {
       toast.success("Your email address has been confirmed. Now you can login.");
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     // Currently "sign in" card is shown on login page.

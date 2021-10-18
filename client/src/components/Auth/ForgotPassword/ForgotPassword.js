@@ -15,7 +15,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await forgotPasswordAPI(email);
+      await forgotPasswordAPI(email);
       toast.success("Mail to reset password is sent on given email address. Make sure to check spam folder.");
     } catch (err) {
       if (err?.response?.data?.message) {
