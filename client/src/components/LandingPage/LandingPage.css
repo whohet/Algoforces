@@ -9,6 +9,7 @@
   flex-flow: row;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .landing-left {

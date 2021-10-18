@@ -6,7 +6,10 @@
   display: flex;
   flex-flow: column;
   height: 100%;
-  background-image: url('./assets/background.svg');
+}
+
+.app-container-bg {
+  background-image: url("./assets/background.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

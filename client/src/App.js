@@ -47,7 +47,7 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}>
-          <div className="app-container">
+          <div className="app-container app-container-bg">
             <Header />
             <Switch>
               <Route exact path="/" component={LandingPage} />

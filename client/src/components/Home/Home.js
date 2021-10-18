@@ -16,6 +16,7 @@ function Home() {
   useEffect(() => {
     checkLoginStatus();
   }, []);
+
   return <div>Is Logged In: {status ? "True" : "False"}</div>;
 }
 

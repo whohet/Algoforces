@@ -1,5 +1,6 @@
 #header-container {
   border-bottom: 1px solid rgba(189, 189, 189, 0.5);
+  /* background-color: white; */
 }
 
 .header-no-bg {
@@ -10,9 +11,9 @@
   background-color: white;
 }
 
-.navbar {
+/* .navbar {
   max-height: 60px;
-}
+} */
 .navbar-brand {
   font-size: 28px;
   font-weight: 700;
@@ -25,10 +26,11 @@
   font-weight: 600;
   padding-top: 5px;
   color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .route-link:hover {
-  /* color: rgb(92, 92, 92); */
   color: #8c30f5;
   text-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
@@ -49,6 +51,8 @@
   border-radius: 6px;
   font-weight: 600;
   letter-spacing: 0.5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .header-login-button {
