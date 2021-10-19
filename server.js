@@ -55,7 +55,11 @@ app.use(passport.session());
 app.use(express.static("./"));
 
 passport.serializeUser((user, done) => {
-  const sessionUser = { _id: user._id, username: user.username, email: user.email };
+  const sessionUser = {
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+  };
   done(null, sessionUser);
 });
 passport.deserializeUser((sessionUser, done) => {
@@ -66,6 +70,8 @@ passport.deserializeUser((sessionUser, done) => {
 // ----- Routes Start -----
 const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);
+const problemCreateRouter = require("./routes/problemCreateRouter");
+app.use("/problemCreate", problemCreateRouter);
 // ----- Routes End -----
 
 // ----- MongoDB Connect Start -----
