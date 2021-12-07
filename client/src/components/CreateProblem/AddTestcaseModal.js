@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import useLoader from "../../customHooks/useLoader/useLoader";
 import useToast from "../../customHooks/useToast/useToast";
 
-import "./CreateProblem.css";
+import "./EditProblem.css";
 
 function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
   const [inputFile, setInputFile] = useState(null);
@@ -34,13 +34,15 @@ function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
       setTestcases([
         ...testcases,
         {
-          id: testcases.length + 1,
+          // id: testcases.length + 1,
           input: {
-            link: res.inputURL || "https://www.algoforces.me/input_file_not_found",
+            url:
+              res.inputURL || "https://www.algoforces.me/input_file_not_found",
             fileName: inputFile.name,
           },
           output: {
-            link: res.outputURL || "https://www.algoforces.me/input_file_not_found",
+            url:
+              res.outputURL || "https://www.algoforces.me/input_file_not_found",
             fileName: outputFile.name,
           },
           isSample: isSample,
@@ -58,7 +60,13 @@ function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
   return (
     <div>
       <>
-        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
           <Modal.Header closeButton>
             <Modal.Title>Add Testcase</Modal.Title>
           </Modal.Header>
@@ -66,13 +74,31 @@ function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
             <form className="add-testcase-form">
               <label htmlFor="add-testcase-input-file">Input File: </label>
               <div className="add-testcase-input">
-                <p>{inputFile && inputFile.name ? inputFile.name : "Drag your files here or click in this area."}</p>
-                <input type="file" name="outputFile" id="add-testcase-input-file" onChange={handleInputFile} />
+                <p>
+                  {inputFile && inputFile.name
+                    ? inputFile.name
+                    : "Drag your files here or click in this area."}
+                </p>
+                <input
+                  type="file"
+                  name="outputFile"
+                  id="add-testcase-input-file"
+                  onChange={handleInputFile}
+                />
               </div>
               <label htmlFor="add-testcase-output-file">Output File: </label>
               <div className="add-testcase-output">
-                <p>{outputFile && outputFile.name ? outputFile.name : "Drag your files here or click in this area."}</p>
-                <input type="file" name="inputFile" id="add-testcase-output-file" onChange={handleOutputFile} />
+                <p>
+                  {outputFile && outputFile.name
+                    ? outputFile.name
+                    : "Drag your files here or click in this area."}
+                </p>
+                <input
+                  type="file"
+                  name="inputFile"
+                  id="add-testcase-output-file"
+                  onChange={handleOutputFile}
+                />
               </div>
               <div className="add-testcase-is-sample">
                 <input
@@ -82,7 +108,9 @@ function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
                   checked={isSample}
                   onChange={handleIsSample}
                 />
-                <label htmlFor="add-testcase-is-sample-input">&nbsp;Sample Testcase</label>
+                <label htmlFor="add-testcase-is-sample-input">
+                  &nbsp;Sample Testcase
+                </label>
               </div>
             </form>
           </Modal.Body>

@@ -15,9 +15,11 @@ import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
 import Home from "./components/Home/Home";
 import Problemset from "./components/Problemset/Problemset";
 
+import EditProblem from "./components/CreateProblem/EditProblem";
+import MyProblems from "./components/CreateProblem/MyProblems";
+
 import UserContext from "./context/UserContext";
 import Loading from "./components/utils/Loading/Loading";
-import CreateProblem from "./components/CreateProblem/CreateProblem";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,16 +48,19 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}>
+        <UserContext.Provider
+          value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}
+        >
           <div className="app-container app-container-bg">
             <Header />
             <Switch>
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/forgotpassword" component={ForgotPassword} />
-              <PrivateRoute exact path="/home" component={Home} />
-              <PrivateRoute exact path="/problemset" component={Problemset} />
-              <Route exact path="/create" component={CreateProblem} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/problemset" component={Problemset} />
+              <PrivateRoute exact path="/myProblems" component={MyProblems} />
+              <PrivateRoute exact path="/edit/:id" component={EditProblem} />
               <Route path="*" component={Page404} />
             </Switch>
           </div>

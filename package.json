@@ -2,7 +2,7 @@
   "name": "Algoforces",
   "version": "1.0.0",
   "description": "An Online Judge",
-  "main": "index.js",
+  "main": "server.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

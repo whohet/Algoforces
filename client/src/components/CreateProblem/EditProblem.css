@@ -1,9 +1,9 @@
-.create-problem-full {
+.edit-problem-full {
   flex: 1;
   background-color: white;
 }
 
-.create-problem-container {
+.edit-problem-container {
   overflow: auto;
   max-width: 900px;
   padding-bottom: 250px;
@@ -13,84 +13,83 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.create-problem-title {
+.edit-problem-title {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
 }
 
-.create-problem-container > div {
+.edit-problem-container > div {
   margin: 20px 40px;
 }
 
 /* Problem name, statement,... CSS */
 
-.create-problem-headers {
+.edit-problem-headers {
   font-weight: bold;
 }
 
-.create-problem-name {
+.edit-problem-name {
 }
-.create-problem-name > input {
+.edit-problem-name > input {
   width: 100%;
   height: 35px;
   padding: 0 10px;
 }
 
-.create-problem-statement {
+.edit-problem-statement {
 }
 
-.create-problem-testcase {
+.edit-problem-testcase {
   text-align: center;
 }
 
-.create-problem-explanation {
+.edit-problem-explaination {
 }
 
-.create-problem-config {
+.edit-problem-config {
   display: flex;
   flex-wrap: wrap;
 }
 
 /* Problem Config section CSS */
 
-.create-problem-config > div {
+.edit-problem-config > div {
   width: 50%;
   margin: 10px 0;
   padding: 0 20px;
 }
 @media (max-width: 500px) {
-  .create-problem-config > div {
+  .edit-problem-config > div {
     width: 100%;
   }
 }
 
-.create-problem-config-time > input {
+.edit-problem-config-time > input {
   width: 100%;
   height: 35px;
   padding: 0 10px;
 }
 
-.create-problem-config-memory > input {
+.edit-problem-config-memory > input {
   width: 100%;
   height: 35px;
   padding: 0 10px;
 }
 
-.create-problem-config-difficulty {
+.edit-problem-config-difficulty {
 }
 
-.create-problem-config-tags {
+.edit-problem-config-tags {
 }
 
 /* Save and Publish Buttons */
 
-.create-problem-buttons {
+.edit-problem-buttons {
   text-align: center;
 }
 
-.create-problem-buttons > button {
-  width: 100px;
+.edit-problem-buttons > button {
   margin: 20px 10px;
 }
 

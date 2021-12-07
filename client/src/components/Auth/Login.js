@@ -88,7 +88,12 @@ function Login() {
     // Search contains URL query parameters. like "?emailConfirm=true"
     // So we will show message to user that their email is confirmed.
     if (search.includes("?emailConfirm=true")) {
-      toast.success("Your email address has been confirmed. Now you can login.");
+      toast.success(
+        "Your email address has been confirmed. Now you can login."
+      );
+    }
+    if (state && state.signinRequired && state.signinRequired === true) {
+      toast.error("Please login to continue.");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -111,7 +116,12 @@ function Login() {
   return (
     <>
       <div id="login-container">
-        <div className={`login-card ${method === "signup" ? "right-panel-active" : ""} `} id="login-card">
+        <div
+          className={`login-card ${
+            method === "signup" ? "right-panel-active" : ""
+          } `}
+          id="login-card"
+        >
           <div className="form-container sign-up-container">
             <form onSubmit={onSignUpClick}>
               <h1>Create Account</h1>
@@ -168,7 +178,10 @@ function Login() {
             <div className="overlay">
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your sign-in details</p>
+                <p>
+                  To keep connected with us please login with your sign-in
+                  details
+                </p>
                 <button onClick={changeToSignIn} className="ghost" id="signIn">
                   Sign In
                 </button>

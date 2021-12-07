@@ -1,3 +1,4 @@
+// --------------- Prerequisites ---------------
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -6,31 +7,31 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-//-----Prerequisites Done
 
 app.use(
   cors({
-    origin: CLIENT_URL, // allow to server to accept request from different origin
+    origin: CLIENT_URL, // Allow to server to accept request from different origin.
     methods: "*",
-    credentials: true, // allow session cookie from browser to pass through
+    credentials: true, // Allow session cookie from browser to pass through.
   })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// ----- Passport Start -----
+// --------------- Passport Config ---------------
 const passport = require("passport");
 const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.model");
 const env = process.env.NODE_ENV || "development";
 
+// ----- Configure auth session options -----
 const sessionOptions = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 30, // cookie expiry time = 1 month (in milliseconds)
+    maxAge: 1000 * 60 * 60 * 24 * 30, // Cookie expiry time = 1 month (in milliseconds)
   },
 };
 if (env == "production") {
@@ -59,22 +60,21 @@ passport.serializeUser((user, done) => {
     _id: user._id,
     username: user.username,
     email: user.email,
+    userType: user.userType,
   };
   done(null, sessionUser);
 });
 passport.deserializeUser((sessionUser, done) => {
   done(null, sessionUser);
 });
-// ----- Passport End -----
 
-// ----- Routes Start -----
+// --------------- Routes ---------------
 const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);
 const problemCreateRouter = require("./routes/problemCreateRouter");
 app.use("/problemCreate", problemCreateRouter);
-// ----- Routes End -----
 
-// ----- MongoDB Connect Start -----
+// --------------- Connect to MongoDB ---------------
 const uri = process.env.ATLAS_URI;
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -82,8 +82,8 @@ mongoose
     console.log("MongoDB database connection established successfully");
   })
   .catch((err) => console.log(err));
-// ----- MongoDB Connect End -----
 
+// --------------- Listen to given PORT ---------------
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    userType: {
+      type: String,
+      default: "normal",
+    },
     avatarUrl: {
       type: String,
       default: "",

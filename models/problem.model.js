@@ -1,67 +1,110 @@
 const mongoose = require("mongoose");
 
 const testcaseSchema = new mongoose.Schema({
-  type: Object,
-  properties: {
-    id: { type: Number },
-    inputURL: { type: String },
-    inputFileName: { type: String },
-    outputURL: { type: String },
-    outputFileName: { type: String },
-    isSample: { type: Boolean },
+  input: {
+    url: {
+      type: String,
+      required: true,
+    },
+    fileName: {
+      type: String,
+      required: true,
+    },
   },
-  required: [
-    "id",
-    "inputURL",
-    "inputFile",
-    "outputURL",
-    "outputFile",
-    "isSample",
-  ],
+  output: {
+    url: {
+      type: String,
+      required: true,
+    },
+    fileName: {
+      type: String,
+      required: true,
+    },
+  },
+  isSample: {
+    type: Boolean,
+    required: true,
+  },
 });
+
 const configSchema = new mongoose.Schema({
-  type: Object,
-  properties: {
-    timelimit: { type: Number },
-    memorylimit: { type: String },
-    difficulty: { type: String },
-    tags: { type: Array, items: { type: String } },
+  timelimit: {
+    type: Number,
+    default: 1000,
   },
-  required: ["timelimit", "memorylimit", "difficulty", "tags"],
+  memorylimit: {
+    type: Number,
+    default: 256,
+  },
+  difficulty: {
+    value: {
+      type: Number,
+      min: 1,
+      max: 3,
+      default: 1,
+    },
+    label: {
+      type: String,
+      default: "Easy",
+    },
+  },
+  tags: {
+    type: Array,
+    items: {
+      type: String,
+    },
+  },
 });
+
+const semiProblemSchema = new mongoose.Schema({
+  statement: {
+    type: String,
+    default: "",
+  },
+  inputFormat: {
+    type: String,
+    default: "",
+  },
+  outputFormat: {
+    type: String,
+    default: "",
+  },
+  constraints: {
+    type: String,
+    default: "",
+  },
+  testcases: {
+    type: Array,
+    items: testcaseSchema,
+  },
+  explaination: {
+    type: String,
+    default: "",
+  },
+  config: configSchema,
+});
+
 const problemSchema = new mongoose.Schema(
   {
+    problemId: {
+      type: Number,
+      unique: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
     problemName: {
       type: String,
       required: true,
       unique: true,
     },
-    statement: {
-      type: String,
-      required: true,
-      unique: true,
+    isPublished: {
+      type: Boolean,
+      default: false,
     },
-    inputFormat: {
-      type: String,
-      required: true,
-    },
-    outputFormat: {
-      type: String,
-      required: true,
-    },
-    constraints: {
-      type: String,
-      required: true,
-    },
-    testcase: {
-      type: Array,
-      items: testcaseSchema,
-    },
-    explaination: {
-      type: String,
-      required: false,
-    },
-    config: configSchema,
+    saved: semiProblemSchema,
+    published: semiProblemSchema,
   },
   {
     timestamps: true,
