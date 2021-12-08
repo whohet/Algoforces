@@ -13,7 +13,9 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Login from "./components/Auth/Login";
 import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
 import Home from "./components/Home/Home";
+
 import Problemset from "./components/Problemset/Problemset";
+import Problem from "./components/Problem/Problem";
 
 import EditProblem from "./components/CreateProblem/EditProblem";
 import MyProblems from "./components/CreateProblem/MyProblems";
@@ -59,6 +61,7 @@ function App() {
               <Route exact path="/forgotpassword" component={ForgotPassword} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/problemset" component={Problemset} />
+              <Route exact path="/problem/:id" component={Problem} />
               <PrivateRoute exact path="/myProblems" component={MyProblems} />
               <PrivateRoute exact path="/edit/:id" component={EditProblem} />
               <Route path="*" component={Page404} />

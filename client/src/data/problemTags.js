@@ -1,4 +1,4 @@
-export const problemTags = [
+export const PROBLEM_TAGS = [
   { value: "math", label: "Math" },
   { value: "greedy", label: "Greedy" },
   { value: "string", label: "String" },

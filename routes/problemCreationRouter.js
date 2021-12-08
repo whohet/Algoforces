@@ -43,7 +43,7 @@ router.post("/create", userAuth, async (req, res) => {
       if (result) {
         return res.status(400).json({
           success: false,
-          message: "Problem name already exists. Please try another name.",
+          message: "Problem with same name already exists. Please try another name.",
         });
       }
       const sampleProblemData = {
@@ -147,9 +147,12 @@ router.post("/save", userAuth, async (req, res) => {
       });
     }
   } catch (err) {
+    if (err && err.codeName === "DuplicateKey") {
+      return res.status(400).json({ success: false, message: "Problem name must be unique. Please try another name."})
+    }
     return res
       .status(500)
-      .json({ err, success: false, message: "Internal server error" });
+      .json({ success: false, message: "Internal server error. Please try again." });
   }
 });
 
@@ -198,6 +201,7 @@ router.post("/saveandpublish", userAuth, async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Problem saved and published successfully",
+        problemId,
       });
     } else {
       return res.status(403).json({
@@ -206,6 +210,9 @@ router.post("/saveandpublish", userAuth, async (req, res) => {
       });
     }
   } catch (err) {
+    if (err && err.codeName === "DuplicateKey") {
+      return res.status(400).json({ success: false, message: "Problem name must be unique. Please try another name."})
+    }
     return res
       .status(500)
       .json({ err, success: false, message: "Internal server error" });

@@ -14,8 +14,8 @@ import {
 } from "../../api/problemCreationApi";
 import "./EditProblem.css";
 
-import { problemTags } from "../../data/problemTags";
-import { problemDifficulty } from "../../data/problemDifficulty";
+import { PROBLEM_TAGS } from "../../data/problemTags";
+import { PROBLEM_DIFFICULTIES } from "../../data/problemDifficulties";
 import useToast from "../../customHooks/useToast/useToast";
 import useLoader from "../../customHooks/useLoader/useLoader";
 
@@ -150,7 +150,9 @@ function CreateProblem() {
       setTestcases(newTestcases);
     }
   };
+
   const saveProblem = async () => {
+    showLoader();
     const problem = {
       statement,
       inputFormat,
@@ -168,8 +170,11 @@ function CreateProblem() {
         res.message || "Something went wrong. Please try again.";
       toast.error(errorMessage);
     }
+    hideLoader();
   };
+
   const saveAndPublishProblem = async () => {
+    showLoader();
     const problem = {
       statement,
       inputFormat,
@@ -185,12 +190,14 @@ function CreateProblem() {
       problem,
     });
     if (res.success) {
+      setProblemId(res.problemId);
       toast.success("Problem saved and pubished successfully");
     } else {
       const errorMessage =
         res.message || "Something went wrong. Please try again.";
       toast.error(errorMessage);
     }
+    hideLoader();
   };
 
   useEffect(() => {
@@ -205,7 +212,6 @@ function CreateProblem() {
   return (
     <>
       <div className="edit-problem-full">
-        
         <div className="edit-problem-container">
           <div className="edit-problem-title">Create Problem</div>
 
@@ -365,7 +371,7 @@ function CreateProblem() {
               <div className="edit-problem-headers">Difficulty</div>
               <Select
                 value={config.difficulty}
-                options={problemDifficulty}
+                options={PROBLEM_DIFFICULTIES}
                 name="difficulty"
                 onChange={(value) =>
                   setConfig({ ...config, difficulty: value })
@@ -377,7 +383,7 @@ function CreateProblem() {
               <div className="edit-problem-headers">Tags</div>
               <Select
                 value={config.tags}
-                options={problemTags}
+                options={PROBLEM_TAGS}
                 isMulti={true}
                 isClearable={true}
                 name="tags"

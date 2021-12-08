@@ -3,7 +3,7 @@ import { SERVER_URL } from "../config/config";
 
 export const getMyProblemsAPI = async () => {
   try {
-    const res = await axios.get(`${SERVER_URL}/problemCreate/getMyProblems`, {
+    const res = await axios.get(`${SERVER_URL}/problemCreation/getMyProblems`, {
       withCredentials: true,
     });
     return res.data;
@@ -17,7 +17,7 @@ export const getMyProblemsAPI = async () => {
 export const createProblemAPI = async (problemData) => {
   try {
     const res = await axios.post(
-      `${SERVER_URL}/problemCreate/create`,
+      `${SERVER_URL}/problemCreation/create`,
       problemData,
       { withCredentials: true }
     );
@@ -31,7 +31,7 @@ export const createProblemAPI = async (problemData) => {
 
 export const getProblemDataAPI = async (problemInfo) => {
   try {
-    const res = await axios.get(`${SERVER_URL}/problemCreate/getProblemData`, {
+    const res = await axios.get(`${SERVER_URL}/problemCreation/getProblemData`, {
       params: { ...problemInfo },
       withCredentials: true,
     });
@@ -46,7 +46,7 @@ export const getProblemDataAPI = async (problemInfo) => {
 export const saveProblemAPI = async (problemData) => {
   try {
     const res = await axios.post(
-      `${SERVER_URL}/problemCreate/save`,
+      `${SERVER_URL}/problemCreation/save`,
       problemData,
       { withCredentials: true }
     );
@@ -61,7 +61,7 @@ export const saveProblemAPI = async (problemData) => {
 export const saveAndPublishProblemAPI = async (problemData) => {
   try {
     const res = await axios.post(
-      `${SERVER_URL}/problemCreate/saveandpublish`,
+      `${SERVER_URL}/problemCreation/saveandpublish`,
       problemData,
       { withCredentials: true }
     );
