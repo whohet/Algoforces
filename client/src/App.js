@@ -61,7 +61,7 @@ function App() {
               <Route exact path="/forgotpassword" component={ForgotPassword} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/problemset" component={Problemset} />
-              <Route exact path="/problem/:id" component={Problem} />
+              <Route exact path="/problem/:problemId/:activeTab?" component={Problem} />
               <PrivateRoute exact path="/myProblems" component={MyProblems} />
               <PrivateRoute exact path="/edit/:id" component={EditProblem} />
               <Route path="*" component={Page404} />

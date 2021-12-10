@@ -27,7 +27,34 @@ router.get("/getProblemsList", async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      message: "Internal server error. Please try again",
+      message: "Internal server error. Please try again.",
+    });
+  }
+});
+
+router.get("/getProblemData", async (req, res) => {
+  try {
+    const problemId = req.query.problemId;
+    const problem = await Problem.findOne(
+      {
+        problemId: problemId,
+        isPublished: true,
+      },
+      {
+        _id: 1,
+        problemId: 1,
+        problemName: 1,
+        published: 1,
+      }
+    );
+    return res.status(200).json({
+      success: true,
+      problem,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error. Please try again.",
     });
   }
 });

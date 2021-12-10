@@ -1,0 +1,14 @@
+.code-editor {
+  height: 100%;
+  width: 100%;
+}
+
+/* Need to add to avoid weird cursor issue. Need to use monospace fonts for the correct behaviour */
+.ace_editor,
+.ace_editor * {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas",
+    monospace !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}

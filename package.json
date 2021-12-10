@@ -27,7 +27,8 @@
     "nodemailer": "^6.6.5",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0"
+    "passport-local-mongoose": "^6.1.0",
+    "react-split-pane": "^0.1.92"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

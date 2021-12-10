@@ -77,7 +77,7 @@ const semiProblemSchema = new mongoose.Schema({
     type: Array,
     items: testcaseSchema,
   },
-  explaination: {
+  explanation: {
     type: String,
     default: "",
   },

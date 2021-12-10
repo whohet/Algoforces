@@ -43,7 +43,8 @@ router.post("/create", userAuth, async (req, res) => {
       if (result) {
         return res.status(400).json({
           success: false,
-          message: "Problem with same name already exists. Please try another name.",
+          message:
+            "Problem with same name already exists. Please try another name.",
         });
       }
       const sampleProblemData = {
@@ -52,7 +53,7 @@ router.post("/create", userAuth, async (req, res) => {
         outputFormat: "",
         constraints: "",
         testcases: [],
-        explaination: "",
+        explanation: "",
         config: {
           timelimit: 1000,
           memorylimit: 256,
@@ -148,11 +149,19 @@ router.post("/save", userAuth, async (req, res) => {
     }
   } catch (err) {
     if (err && err.codeName === "DuplicateKey") {
-      return res.status(400).json({ success: false, message: "Problem name must be unique. Please try another name."})
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Problem name must be unique. Please try another name.",
+        });
     }
     return res
       .status(500)
-      .json({ success: false, message: "Internal server error. Please try again." });
+      .json({
+        success: false,
+        message: "Internal server error. Please try again.",
+      });
   }
 });
 
@@ -211,7 +220,12 @@ router.post("/saveandpublish", userAuth, async (req, res) => {
     }
   } catch (err) {
     if (err && err.codeName === "DuplicateKey") {
-      return res.status(400).json({ success: false, message: "Problem name must be unique. Please try another name."})
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Problem name must be unique. Please try another name.",
+        });
     }
     return res
       .status(500)

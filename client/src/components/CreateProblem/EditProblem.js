@@ -27,7 +27,7 @@ function CreateProblem() {
   const [outputFormat, setOutputFormat] = useState("");
   const [constraints, setConstrains] = useState("");
   const [testcases, setTestcases] = useState([]);
-  const [explaination, setExplanation] = useState("");
+  const [explanation, setExplanation] = useState("");
   const [config, setConfig] = useState({});
 
   const [toast, ToastContainer] = useToast();
@@ -86,7 +86,7 @@ function CreateProblem() {
   //       isSample: false,
   //     },
   //   ],
-  //   explaination: `
+  //   explanation: `
   //     In first sample test case, first values is <b>3</b> and second is <b>5</b>. So sum is <b>8</b>
   //   `,
   //   config: {
@@ -111,7 +111,7 @@ function CreateProblem() {
       setOutputFormat(problem.outputFormat);
       setConstrains(problem.constraints);
       setTestcases(problem.testcases);
-      setExplanation(problem.explaination);
+      setExplanation(problem.explanation);
       setConfig(problem.config);
     } else {
       const errorMessage =
@@ -159,7 +159,7 @@ function CreateProblem() {
       outputFormat,
       constraints,
       testcases,
-      explaination,
+      explanation,
       config,
     };
     const res = await saveProblemAPI({ _id: params.id, problemName, problem });
@@ -181,7 +181,7 @@ function CreateProblem() {
       outputFormat,
       constraints,
       testcases,
-      explaination,
+      explanation,
       config,
     };
     const res = await saveAndPublishProblemAPI({
@@ -331,12 +331,12 @@ function CreateProblem() {
             </Button>
           </div>
 
-          <div className="edit-problem-explaination">
+          <div className="edit-problem-explanation">
             <div className="edit-problem-headers">Sample Explanation</div>
             <RichTextEditor
-              data={explaination}
+              data={explanation}
               setData={setExplanation}
-              placeholder="Enter sameple testcase explaination here..."
+              placeholder="Enter sameple testcase explanation here..."
             />
           </div>
 

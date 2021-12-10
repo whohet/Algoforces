@@ -1,0 +1,128 @@
+.problem-page-full {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+}
+/* Problem Page Left Panel */
+.problem-page-left-side {
+  height: 100%;
+}
+
+/* Problem Page Left Panel Inner Tab Styling */
+.problem-page-left-side > ul {
+  margin-bottom: 0px !important;
+}
+
+.problem-page-left-side > div {
+  height: calc(100% - 50px);
+  overflow-y: auto;
+}
+
+/* Scrollbar Styling */
+.problem-page-left-side > div::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.problem-page-left-side > div::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+
+.problem-page-left-side > div::-webkit-scrollbar-thumb {
+  background-color: #8f8c8c;
+  border: 1px solid #727272;
+}
+
+/* Problem Page Right Panel  */
+.problem-page-right-side {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right Side Config Panel */
+.code-editor-config {
+  flex: 0 1 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.code-editor-config > div {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.select-language-container {
+  z-index: 10;
+}
+/* Preferences Modal Styling */
+.preferences-all {
+  display: flex;
+  flex-direction: column;
+}
+.preferences-item-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+#select-font-size,
+#select-tab-size {
+  width: 30%;
+  height: 36px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* Right Side Code Editor  */
+.code-editor-container {
+  flex: 1 1 auto;
+}
+
+/* Right Side Submission Part */
+.code-runner-container {
+  flex: 0 1 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+.code-runner-container > div {
+  margin: 0px 10px;
+  cursor: pointer;
+}
+.code-runner-left {
+}
+.code-runner-right {
+  display: flex;
+}
+.run-code-button {
+  margin: 0 10px;
+}
+.submit-code-button {
+  margin: 0 10px;
+}
+
+/* ------------------- */
+/* React Split Styling */
+.split {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  cursor: col-resize;
+}

@@ -73,8 +73,8 @@ const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);
 const problemCreationRouter = require("./routes/problemCreationRouter");
 app.use("/problemCreation", problemCreationRouter);
-const problemsRouter = require("./routes/problemsRouter");
-app.use("/problems", problemsRouter);
+const problemRouter = require("./routes/problemRouter");
+app.use("/problem", problemRouter);
 
 // --------------- Connect to MongoDB ---------------
 const uri = process.env.ATLAS_URI;
@@ -83,7 +83,7 @@ mongoose
   .then(() => {
     console.log("MongoDB database connection established successfully");
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.error(err));
 
 // --------------- Listen to given PORT ---------------
 app.listen(PORT, () => {

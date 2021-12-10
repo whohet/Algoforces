@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { getProblemsListAPI } from "../../api/problems";
+import { getProblemsListAPI } from "../../api/problem";
 
 import { Container } from "react-bootstrap";
 import TableContainer from "./TableContainer";

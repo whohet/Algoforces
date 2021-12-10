@@ -12,7 +12,6 @@ function RichTextEditor({ data, setData, ...props }) {
         data={data}
         config={config}
         onReady={(editor) => {
-          // console.log("Editor is ready to use!", editor);
         }}
         onChange={(event, editor) => {
           const newData = editor.getData();
