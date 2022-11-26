@@ -66,7 +66,7 @@ router.post("/register", async (req, res) => {
     if (!info.success) {
       return res
         .status(500)
-        .json({ success: false, message: " Internal server error. Can't send confirmation mail. Please try again." });
+        .json({ success: false, message: "Internal server error. Can't send confirmation mail. Please try again." });
     }
     return res.status(200).json({ success: true, message: "Your account has been created successfully." });
   });

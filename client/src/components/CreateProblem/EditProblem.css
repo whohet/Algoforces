@@ -44,6 +44,10 @@
   text-align: center;
 }
 
+.edit-problem-checker-code {
+  flex: 1 1 auto;
+}
+
 .edit-problem-explanation {
 }
 

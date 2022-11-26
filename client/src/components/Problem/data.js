@@ -23,32 +23,38 @@ export const DEFAULT_PREFERENCE = {
   tabSize: 4,
 };
 
-export const LANGUAGE_DATA = {
-  cpp: {
-    label: "C++",
-    code: `#include <bits/stdc++.h>
+export const CPP_DATA = {
+  label: "C++",
+  code: `#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    
-    return 0;
+  
+  return 0;
 }
 `,
-  },
-  java: {
-    label: "Java",
-    code: `public class Solution {
-    public static int main(String[] args) {
-        
-    }
+};
+
+export const JAVA_DATA = {
+  label: "Java",
+  code: `public class Solution {
+  public static int main(String[] args) {
+      
+  }
 }
 `,
-  },
-  python: {
-    label: "Python",
-    code: `import math
+};
+
+export const PYTHON_DATA = {
+  label: "Python",
+  code: `import math
 
 print("Hello World")
 `,
-  },
+};
+
+export const LANGUAGE_DATA = {
+  cpp: CPP_DATA,
+  java: JAVA_DATA,
+  python: PYTHON_DATA,
 };

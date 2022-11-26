@@ -18,6 +18,9 @@ import { PROBLEM_TAGS } from "../../data/problemTags";
 import { PROBLEM_DIFFICULTIES } from "../../data/problemDifficulties";
 import useToast from "../../customHooks/useToast/useToast";
 import useLoader from "../../customHooks/useLoader/useLoader";
+import CodeEditor from "../Problem/CodeEditor/CodeEditor";
+
+import { DEFAULT_PREFERENCE, CPP_DATA } from "../Problem/data";
 
 function CreateProblem() {
   const [problemId, setProblemId] = useState(null);
@@ -29,6 +32,10 @@ function CreateProblem() {
   const [testcases, setTestcases] = useState([]);
   const [explanation, setExplanation] = useState("");
   const [config, setConfig] = useState({});
+
+  // Checker code editor
+  const [codes, setCodes] = useState({ cpp: CPP_DATA });
+  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCE);
 
   const [toast, ToastContainer] = useToast();
   const [loader, showLoader, hideLoader] = useLoader();
@@ -329,6 +336,15 @@ function CreateProblem() {
             >
               Add Testcase
             </Button>
+          </div>
+
+          <div className="edit-problem-checker-code">
+            <div className="edit-problem-headers">Checker Code: </div>
+            <CodeEditor
+              codes={codes}
+              setCodes={setCodes}
+              preferences={preferences}
+            />
           </div>
 
           <div className="edit-problem-explanation">
