@@ -94,8 +94,16 @@ function Problem() {
       code: codes[preferences.language].code,
       language: preferences.language,
     };
+    showLoader();
     const res = await runCodeAPI(submissionInfo);
     console.log(res);
+    hideLoader();
+    if (!res.success) {
+      toast.error(
+        res.message || "Something went wrong. Please try again later."
+      );
+      return;
+    }
     setVerdict(res.verdict);
     setShowVerdictModal(true);
   };
@@ -106,8 +114,16 @@ function Problem() {
       code: codes[preferences.language].code,
       language: preferences.language,
     };
+    showLoader();
     const res = await submitCodeAPI(submissionInfo);
     console.log(res);
+    hideLoader();
+    if (!res.success) {
+      toast.error(
+        res.message || "Something went wrong. Please try again later."
+      );
+      return;
+    }
     setVerdict(res.verdict);
     setShowVerdictModal(true);
   };

@@ -83,15 +83,26 @@ const complieAndRunHelper = async (program) => {
     };
   }
 };
-router.post("/complieAndRun", async (req, res) => {
+router.post("/compileAndRun", userAuth, async (req, res) => {
   try {
     //prepare
     let verdictName = "ac";
     let verdictLabel = "Accepted!";
     const problemId = req.body.problemId;
-    const isSample = req.body.isSample == "true" ? true : false;
+    const isSample = req.body.isSample;
     const code = req.body.code;
-    const language = req.body.language;
+    let language = req.body.language;
+    let versionIndex = 0;
+    if (language === "cpp") {
+      language = "cpp17";
+      versionIndex = "1";
+    } else if (language === "java") {
+      language = "java";
+      versionIndex = 4;
+    } else if (language === "python") {
+      language = "python3";
+      versionIndex = 4;
+    }
     //fetch
     const problem = await Problem.findOne(
       {
@@ -111,29 +122,40 @@ router.post("/complieAndRun", async (req, res) => {
     const memoryLimit = problemJSON.published.config.memorylimit * 1000;
     const checkerCode = problemJSON.published.checkerCode;
     for (let i = 0; i < problemJSON.published.testcases.length; i++) {
-      if (isSample != problemJSON.published.testcases[i].isSample) continue;
-      console.log(problemJSON.published.testcases[i].input.url);
-      console.log(code);
+      // If user has clicked on "Run" button then we will only run the code on sample testcases.
+      if (
+        isSample == true &&
+        problemJSON.published.testcases[i].isSample == false
+      )
+        continue;
+
       let program = {
         script: code,
         stdin: problemJSON.published.testcases[i].input.url,
         language: language,
-        versionIndex: "0",
+        versionIndex: versionIndex,
         clientId: process.env.JDOODLE_CLIENT_ID,
         clientSecret: process.env.JDOODLE_CLIENT_SECRET,
       };
       const clientCodeResult = await complieAndRunHelper(program);
-      console.log(clientCodeResult);
-
+      if (clientCodeResult.body.memory == null) {
+        if (clientCodeResult.body.output.includes("JDoodle - Timeout")) {
+          verdictName = "tle";
+          verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
+          break;
+        }
+        verdictName = "ce";
+        verdictLabel = "Compilation Error";
+        break;
+      }
       if (clientCodeResult.body.memory > memoryLimit) {
-        (verdictName = "mle"),
-          (verdictLabel =
-            "Memory Limit Exceeded on Test Case " + String(i + 1));
+        verdictName = "mle";
+        verdictLabel = "Memory Limit Exceeded on Test Case " + String(i + 1);
         break;
       }
       if (clientCodeResult.body.cpuTime > timeLimit) {
-        (verdictName = "tle"),
-          (verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1));
+        verdictName = "tle";
+        verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
         break;
       }
       program.script = checkerCode;
@@ -142,10 +164,10 @@ router.post("/complieAndRun", async (req, res) => {
         " " +
         clientCodeResult.body.output;
       const checkerCodeResult = await complieAndRunHelper(program);
-
-      if (clientCodeResult.body.output == "0") {
-        (verdictName = "wa"),
-          (verdictLabel = "Wrong Answer on Test Case " + String(i + 1));
+      console.log(checkerCodeResult);
+      if (checkerCodeResult.body.output[0] == "0") {
+        verdictName = "wa";
+        verdictLabel = "Wrong Answer on Test Case " + String(i + 1);
         break;
       }
     }
