@@ -45,10 +45,18 @@
 }
 
 .edit-problem-checker-code {
+  min-height: 300px;
+  display: flex;
+}
+
+.edit-problem-checker-code-editor {
   flex: 1 1 auto;
 }
 
+
+
 .edit-problem-explanation {
+  margin-top: 50px !important;
 }
 
 .edit-problem-config {

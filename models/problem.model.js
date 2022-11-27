@@ -77,6 +77,10 @@ const semiProblemSchema = new mongoose.Schema({
     type: Array,
     items: testcaseSchema,
   },
+  checkerCode: {
+    type: String,
+    default: "",
+  },
   explanation: {
     type: String,
     default: "",

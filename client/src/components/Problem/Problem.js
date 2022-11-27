@@ -12,7 +12,12 @@ import { Button, Tab, Tabs } from "react-bootstrap";
 import useLoader from "../../customHooks/useLoader/useLoader";
 import useToast from "../../customHooks/useToast/useToast";
 
-import { getPreferencesAPI, getProblemDataAPI } from "../../api/problem";
+import {
+  getPreferencesAPI,
+  getProblemDataAPI,
+  runCodeAPI,
+  submitCodeAPI,
+} from "../../api/problem";
 
 import "./Problem.css";
 import "./SplitPaneStyles.css";
@@ -76,9 +81,30 @@ function Problem() {
     history.push(`/problem/${params.problemId}/${newTabName}`);
   };
 
+  const onRunCode = async () => {
+    const submissionInfo = {
+      problemId: params.problemId,
+      isSample: true,
+      code: codes[preferences.language].code,
+      language: preferences.language,
+    };
+    const res = await runCodeAPI(submissionInfo);
+    console.log(res);
+  };
+  const onSubmitCode = async () => {
+    const submissionInfo = {
+      problemId: params.problemId,
+      isSample: false,
+      code: codes[preferences.language].code,
+      language: preferences.language,
+    };
+    const res = await submitCodeAPI(submissionInfo);
+    console.log(res);
+  };
+
   useEffect(() => {
     setActiveTab(getValidTabName(params.activeTab));
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
@@ -143,14 +169,18 @@ function Problem() {
             </div>
             <div className="code-runner-container">
               <div className="code-runner-left">
-                <Button variant="primary">Custom test</Button>
+                {/* <Button variant="primary">Custom test</Button> */}
               </div>
               <div className="code-runner-right">
                 <div className="run-code-button">
-                  <Button variant="primary">Run</Button>
+                  <Button variant="primary" onClick={onRunCode}>
+                    Run
+                  </Button>
                 </div>
                 <div className="submit-code-button">
-                  <Button variant="success">Submit</Button>
+                  <Button variant="success" onClick={onSubmitCode}>
+                    Submit
+                  </Button>
                 </div>
               </div>
             </div>

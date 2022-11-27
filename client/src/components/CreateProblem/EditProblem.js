@@ -166,9 +166,11 @@ function CreateProblem() {
       outputFormat,
       constraints,
       testcases,
+      checkerCode: codes.cpp.code,
       explanation,
       config,
     };
+    console.log(problem);
     const res = await saveProblemAPI({ _id: params.id, problemName, problem });
     if (res.success) {
       toast.success("Problem saved successfully");
@@ -188,6 +190,7 @@ function CreateProblem() {
       outputFormat,
       constraints,
       testcases,
+      checkerCode: codes.cpp.code,
       explanation,
       config,
     };
@@ -302,6 +305,7 @@ function CreateProblem() {
                           href={testcase.output.url}
                           target="_blank"
                           rel="noreferrer"
+                          
                         >
                           {testcase.output.fileName}
                         </a>
@@ -337,14 +341,15 @@ function CreateProblem() {
               Add Testcase
             </Button>
           </div>
-
           <div className="edit-problem-checker-code">
-            <div className="edit-problem-headers">Checker Code: </div>
-            <CodeEditor
-              codes={codes}
-              setCodes={setCodes}
-              preferences={preferences}
-            />
+            <div className="edit-problem-checker-code-editor">
+              <div className="edit-problem-headers">Checker Code: </div>
+              <CodeEditor
+                codes={codes}
+                setCodes={setCodes}
+                preferences={preferences}
+              />
+            </div>
           </div>
 
           <div className="edit-problem-explanation">

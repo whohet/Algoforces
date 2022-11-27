@@ -31,28 +31,40 @@ function AddTestcaseModal({ show, setShow, testcases, setTestcases }) {
     showLoader();
     try {
       const res = {};
-      setTestcases([
-        ...testcases,
-        {
-          // id: testcases.length + 1,
-          input: {
-            url:
-              res.inputURL || "https://www.algoforces.me/input_file_not_found",
-            fileName: inputFile.name,
+      const inputReader = new FileReader();
+      const outputReader = new FileReader();
+      let inputText = "";
+      let outputText = "";
+      outputReader.onload = async (e) => {
+        outputText = e.target.result;
+        setTestcases([
+          ...testcases,
+          {
+            // id: testcases.length + 1,
+            input: {
+              url: inputText,
+              // res.inputURL || "https://www.algoforces.me/input_file_not_found",
+              fileName: inputFile.name,
+            },
+            output: {
+              url: outputText,
+              // res.outputURL || "https://www.algoforces.me/input_file_not_found",
+              fileName: outputFile.name,
+            },
+            isSample: isSample,
           },
-          output: {
-            url:
-              res.outputURL || "https://www.algoforces.me/input_file_not_found",
-            fileName: outputFile.name,
-          },
-          isSample: isSample,
-        },
-      ]);
-      setInputFile(null);
-      setOutputFile(null);
+        ]);
+        setInputFile(null);
+        setOutputFile(null);
 
-      hideLoader();
-      handleClose();
+        hideLoader();
+        handleClose();
+      };
+      inputReader.onload = async (e) => {
+        inputText = e.target.result;
+        outputReader.readAsText(outputFile);
+      };
+      inputReader.readAsText(inputFile);
     } catch (err) {}
     hideLoader();
   };

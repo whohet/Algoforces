@@ -30,7 +30,7 @@ using namespace std;
 
 int main() {
   
-  return 0;
+    return 0;
 }
 `,
 };
@@ -38,9 +38,9 @@ int main() {
 export const JAVA_DATA = {
   label: "Java",
   code: `public class Solution {
-  public static int main(String[] args) {
+    public static int main(String[] args) {
       
-  }
+    }
 }
 `,
 };
