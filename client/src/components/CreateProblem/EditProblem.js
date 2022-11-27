@@ -113,6 +113,11 @@ function CreateProblem() {
       setProblemName(res.problem.problemName);
 
       const problem = res.problem.saved;
+      const checkerCode = { ...codes };
+      if (problem.checkerCode) {
+        checkerCode.cpp.code = problem.checkerCode;
+        setCodes(checkerCode);
+      }
       setStatement(problem.statement);
       setInputFormat(problem.inputFormat);
       setOutputFormat(problem.outputFormat);
@@ -305,7 +310,6 @@ function CreateProblem() {
                           href={testcase.output.url}
                           target="_blank"
                           rel="noreferrer"
-                          
                         >
                           {testcase.output.fileName}
                         </a>
