@@ -126,3 +126,39 @@
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
   cursor: col-resize;
 }
+
+.verdict-container {
+  text-align: center;
+}
+
+.verdict-icon {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.verdict-label {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.verdict-label-ac {
+  color: green;
+}
+
+.verdict-label-wa {
+  color: red;
+}
+
+.verdict-label-re {
+  color: red;
+}
+
+.verdict-label-tle {
+  color: red;
+}
+
+.verdict-label-mle {
+  color: red;
+}

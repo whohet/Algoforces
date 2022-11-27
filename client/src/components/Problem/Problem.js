@@ -28,6 +28,7 @@ import {
   LANGUAGE_DATA,
 } from "./data";
 import PreferencesModal from "./PreferencesModal";
+import VerdictModal from "./VerdictModal";
 
 function Problem() {
   const PROBLEM_PAGE_TABS_NAME = ["submissions", "leaderboard"];
@@ -44,6 +45,11 @@ function Problem() {
   const [toast, ToastContainer] = useToast();
   const [loader, showLoader, hideLoader] = useLoader();
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
+  const [verdict, setVerdict] = useState({
+    name: "ac",
+    label: "Accepted",
+  });
+  const [showVerdictModal, setShowVerdictModal] = useState(false);
 
   useEffect(() => {
     const fetchProblemData = async () => {
@@ -90,6 +96,8 @@ function Problem() {
     };
     const res = await runCodeAPI(submissionInfo);
     console.log(res);
+    setVerdict(res.verdict);
+    setShowVerdictModal(true);
   };
   const onSubmitCode = async () => {
     const submissionInfo = {
@@ -100,6 +108,8 @@ function Problem() {
     };
     const res = await submitCodeAPI(submissionInfo);
     console.log(res);
+    setVerdict(res.verdict);
+    setShowVerdictModal(true);
   };
 
   useEffect(() => {
@@ -194,6 +204,11 @@ function Problem() {
         setPreferences={setPreferences}
         showPreferencesModal={showPreferencesModal}
         setShowPreferencesModal={setShowPreferencesModal}
+      />
+      <VerdictModal
+        verdict={verdict}
+        showVerdictModal={showVerdictModal}
+        setShowVerdictModal={setShowVerdictModal}
       />
     </>
   );
