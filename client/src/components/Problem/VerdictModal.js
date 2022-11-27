@@ -2,7 +2,8 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./Problem.css";
 
-import AcceptedIcon from "../../../src/assets/accepted.png";
+import CEIcon from "../../../src/assets/ce.png";
+import ACIcon from "../../../src/assets/ac.png";
 import WAIcon from "../../../src/assets/wa.png";
 import REIcon from "../../../src/assets/re.png";
 import TLEIcon from "../../../src/assets/tle.png";
@@ -28,10 +29,18 @@ function VerdictModal({ verdict, showVerdictModal, setShowVerdictModal }) {
           <Modal.Body>
             <div className="verdict-container align-center">
               <div className="verdict-icon">
+                {verdict.name === "ce" && (
+                  <img
+                    alt="compilation error icon"
+                    src={CEIcon}
+                    height="80"
+                    className="d-inline-block align-center"
+                  />
+                )}
                 {verdict.name === "ac" && (
                   <img
                     alt="accepted icon"
-                    src={AcceptedIcon}
+                    src={ACIcon}
                     height="80"
                     className="d-inline-block align-center"
                   />

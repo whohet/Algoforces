@@ -143,6 +143,11 @@
   font-weight: bold;
 }
 
+
+.verdict-label-ce {
+  color: red;
+}
+
 .verdict-label-ac {
   color: green;
 }
