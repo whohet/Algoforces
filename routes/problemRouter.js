@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const { config } = require("dotenv");
 const userAuth = require("../middleware/userAuth");
+const User = require("../models/user.model");
 const Problem = require("../models/problem.model");
+const Submission = require("../models/submission.model");
 const axios = require("axios");
 
 router.get("/getProblemsList", async (req, res) => {
@@ -83,6 +85,7 @@ const complieAndRunHelper = async (program) => {
     };
   }
 };
+
 router.post("/compileAndRun", userAuth, async (req, res) => {
   try {
     //prepare
@@ -121,6 +124,8 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
     const timeLimit = problemJSON.published.config.timelimit / 1000;
     const memoryLimit = problemJSON.published.config.memorylimit * 1000;
     const checkerCode = problemJSON.published.checkerCode;
+    let maxTime = 0,
+      maxMemory = 0;
     for (let i = 0; i < problemJSON.published.testcases.length; i++) {
       // If user has clicked on "Run" button then we will only run the code on sample testcases.
       if (
@@ -138,12 +143,13 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         clientSecret: process.env.JDOODLE_CLIENT_SECRET,
       };
       const clientCodeResult = await complieAndRunHelper(program);
+      maxTime = Math.max(maxTime, clientCodeResult.body.cpuTime || 0);
+      maxMemory = Math.max(maxMemory, clientCodeResult.body.memory || 0);
       if (clientCodeResult.body.output.includes("JDoodle - Timeout")) {
         verdictName = "tle";
         verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
         break;
       }
-      console.log("cLIENT: ", clientCodeResult);
       if (
         clientCodeResult.body.memory == null ||
         clientCodeResult.body.output.includes('File "/home/')
@@ -169,14 +175,46 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         problemJSON.published.testcases[i].input.url +
         " " +
         clientCodeResult.body.output;
-      console.log("Program: ", program);
       const checkerCodeResult = await complieAndRunHelper(program);
-      console.log(checkerCodeResult);
+
       if (checkerCodeResult.body.output[0] != "1") {
         verdictName = "wa";
         verdictLabel = "Wrong Answer on Test Case " + String(i + 1);
         break;
       }
+    }
+    if (!isSample) {
+      let submission = new Submission({
+        username: req.session.passport.user.username,
+        problemId: problemId,
+        code: code,
+        language: req.body.language,
+        verdict: verdictLabel,
+        time: maxTime,
+        memory: maxMemory,
+      });
+      submission = await submission.save();
+
+      const user = await User.findById(req.session.passport.user._id);
+      if (verdictName === "ac") {
+        if (user.stats.solved.indexOf(problemId) == -1) {
+          user.stats.solved.push(problemId);
+          user.stats.solvedCount += 1;
+
+          let index = user.stats.unsolved.indexOf(problemId);
+          if (index !== -1) {
+            user.stats.unsolved.splice(index, 1);
+          }
+        }
+      } else {
+        if (
+          user.stats.solved.indexOf(problemId) == -1 &&
+          user.stats.unsolved.indexOf(problemId) == -1
+        ) {
+          user.stats.unsolved.push(problemId);
+        }
+      }
+      await user.save();
     }
 
     return res.status(200).json({
@@ -185,6 +223,68 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         name: verdictName,
         label: verdictLabel,
       },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error. Please try again.",
+    });
+  }
+});
+
+router.get("/submissionsList", userAuth, async (req, res) => {
+  try {
+    const submissionsList = await Submission.find({
+      username: req.query.username,
+      problemId: req.query.problemId,
+    });
+    return res.status(200).json({
+      success: true,
+      submissionsList: submissionsList,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error. Please try again.",
+    });
+  }
+});
+
+router.get("/leaderboard", async (req, res) => {
+  try {
+    const submissions = await Submission.find({
+      problemId: req.query.problemId,
+      verdict: "Accepted!",
+    });
+    submissions.sort((s1, s2) => s1.time - s2.time);
+    return res.status(200).json({
+      success: true,
+      leaderboard: submissions,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error. Please try again.",
+    });
+  }
+});
+
+router.get("/globalLeaderboard", async (req, res) => {
+  try {
+    const leaderboard = await User.find(
+      {},
+      {
+        _id: 0,
+        username: 1,
+        "stats.solvedCount": 1,
+      }
+    ).sort({ "stats.solvedCount": -1 });
+    return res.status(200).json({
+      success: true,
+      leaderboard: leaderboard,
     });
   } catch (err) {
     console.log(err);

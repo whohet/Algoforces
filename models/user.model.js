@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      // required: true,
     },
     isConfirmed: {
       type: Boolean,
@@ -29,6 +28,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    stats: {
+      solved: [Number],
+      unsolved: [Number],
+      solvedCount: {
+        type: Number,
+        default: 0
+      }
+    }
   },
   {
     timestamps: true,

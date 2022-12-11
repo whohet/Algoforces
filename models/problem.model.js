@@ -109,6 +109,13 @@ const problemSchema = new mongoose.Schema(
     },
     saved: semiProblemSchema,
     published: semiProblemSchema,
+    submissions: [
+      {
+        username: String,
+        memory: Number,
+        time: Number,
+      },
+    ],
   },
   {
     timestamps: true,

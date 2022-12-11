@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import AceEditor from "react-ace";
 
 import "./CodeEditor.css";
@@ -18,9 +18,12 @@ AVAILABLE_THEMES.forEach((theme) =>
 
 function CodeEditor({ preferences, codes, setCodes }) {
   const editorRef = useRef();
-
+  const [codesState, setCodesState] = useState(codes);
   const onLoad = (e) => {};
   const onChange = (e) => {
+    if (preferences.disabled) {
+      return;
+    }
     const language = preferences.language;
     const newCodes = { ...codes };
     newCodes[language].code = e;
@@ -30,7 +33,11 @@ function CodeEditor({ preferences, codes, setCodes }) {
   useEffect(() => {
     editorRef.current.editor.resize();
   }, []);
-  
+
+  useEffect(() => {
+    setCodesState(codes);
+  }, [codes, preferences]);
+
   return (
     <div className="code-editor">
       <AceEditor
@@ -49,7 +56,7 @@ function CodeEditor({ preferences, codes, setCodes }) {
         highlightActiveLine={false}
         wrapEnabled={true}
         indentedSoftWrap={false}
-        value={codes[preferences.language].code}
+        value={codesState[preferences.language].code}
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
@@ -57,6 +64,7 @@ function CodeEditor({ preferences, codes, setCodes }) {
           showLineNumbers: true,
           tabSize: preferences.tabSize,
         }}
+        readOnly={preferences.disabled || false}
       />
     </div>
   );

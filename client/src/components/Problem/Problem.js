@@ -96,7 +96,6 @@ function Problem() {
     };
     showLoader();
     const res = await runCodeAPI(submissionInfo);
-    console.log(res);
     hideLoader();
     if (!res.success) {
       toast.error(
@@ -116,7 +115,6 @@ function Problem() {
     };
     showLoader();
     const res = await submitCodeAPI(submissionInfo);
-    console.log(res);
     hideLoader();
     if (!res.success) {
       toast.error(

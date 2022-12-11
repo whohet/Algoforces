@@ -156,9 +156,6 @@ function CreateProblem() {
       const newTestcases = testcases.filter(
         (testcase, index) => index !== deleteIndex
       );
-      // for (let i = 0; i < newTestcases.length; i++) {
-      //   newTestcases[i].id = i + 1
-      // }
       setTestcases(newTestcases);
     }
   };
@@ -175,7 +172,6 @@ function CreateProblem() {
       explanation,
       config,
     };
-    console.log(problem);
     const res = await saveProblemAPI({ _id: params.id, problemName, problem });
     if (res.success) {
       toast.success("Problem saved successfully");

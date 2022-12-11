@@ -167,3 +167,9 @@
 .verdict-label-mle {
   color: red;
 }
+
+
+/* Problem Submission Page */
+.see-code-modal {
+  min-width: 700px;
+}
