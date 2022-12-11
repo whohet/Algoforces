@@ -72,7 +72,7 @@ function App() {
               />
               <Route exact path="/leaderboard" component={Leaderboard} />
               <Route exact path="/faq" component={FAQ} />
-              <Route exact path="/aboutus" component={AboutUs} />
+              {/* <Route exact path="/aboutus" component={AboutUs} /> */}
               <PrivateRoute exact path="/myProblems" component={MyProblems} />
               <PrivateRoute exact path="/edit/:id" component={EditProblem} />
               <Route path="*" component={Page404} />

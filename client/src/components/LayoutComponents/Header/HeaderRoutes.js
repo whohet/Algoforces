@@ -25,10 +25,10 @@ function HeaderRoutes() {
       title: "FAQ",
       path: "/faq",
     },
-    {
-      title: "About Us",
-      path: "/aboutus",
-    },
+    // {
+    //   title: "About Us",
+    //   path: "/aboutus",
+    // },
     ...(userContext?.userData?.userType === "admin"
       ? [
           {
