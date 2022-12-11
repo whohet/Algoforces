@@ -9,10 +9,10 @@ function HeaderRoutes() {
   const userContext = useContext(UserContext);
 
   const routeData = [
-    {
-      title: "Home",
-      path: "/home",
-    },
+    // {
+    //   title: "Home",
+    //   path: "/home",
+    // },
     {
       title: "Problems",
       path: "/problemset",

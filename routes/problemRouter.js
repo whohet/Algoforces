@@ -138,12 +138,16 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         clientSecret: process.env.JDOODLE_CLIENT_SECRET,
       };
       const clientCodeResult = await complieAndRunHelper(program);
-      if (clientCodeResult.body.memory == null) {
-        if (clientCodeResult.body.output.includes("JDoodle - Timeout")) {
-          verdictName = "tle";
-          verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
-          break;
-        }
+      if (clientCodeResult.body.output.includes("JDoodle - Timeout")) {
+        verdictName = "tle";
+        verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
+        break;
+      }
+      console.log("cLIENT: ", clientCodeResult);
+      if (
+        clientCodeResult.body.memory == null ||
+        clientCodeResult.body.output.includes('File "/home/')
+      ) {
         verdictName = "ce";
         verdictLabel = "Compilation Error";
         break;
@@ -158,14 +162,17 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         verdictLabel = "Time Limit Exceeded on Test Case " + String(i + 1);
         break;
       }
+      program.language = "cpp17";
+      program.versionIndex = "1";
       program.script = checkerCode;
       program.stdin =
         problemJSON.published.testcases[i].input.url +
         " " +
         clientCodeResult.body.output;
+      console.log("Program: ", program);
       const checkerCodeResult = await complieAndRunHelper(program);
       console.log(checkerCodeResult);
-      if (checkerCodeResult.body.output[0] == "0") {
+      if (checkerCodeResult.body.output[0] != "1") {
         verdictName = "wa";
         verdictLabel = "Wrong Answer on Test Case " + String(i + 1);
         break;
