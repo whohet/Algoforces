@@ -4,7 +4,7 @@ const userAuth = (req, res, next) => {
   } else {
     return res.status(401).json({
       success: false,
-      message: "Token invalid or expired. Access denied. Please login.",
+      message: "Access denied. Please login to continue.",
     });
   }
 };
