@@ -40,6 +40,7 @@ if (env == "production") {
   sessionOptions.cookie.sameSite = "none";
   sessionOptions.cookie.secure = true;
   sessionOptions.cookie.path = "/";
+  sessionOptions.cookie.domain = "netlify.app";
 }
 app.use(session(sessionOptions));
 
