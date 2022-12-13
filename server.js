@@ -39,7 +39,6 @@ if (env == "production") {
   app.set("trust proxy", 1); // trust first proxy
   sessionOptions.cookie.sameSite = "none";
   sessionOptions.cookie.secure = true;
-  sessionOptions.cookie.httpOnly = false;
   sessionOptions.cookie.path = "/";
 }
 app.use(session(sessionOptions));
