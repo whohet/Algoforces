@@ -32,10 +32,6 @@ function HeaderRight() {
           size="lg"
           className="basic-nav-dropdown"
         >
-          <NavDropdown.Item href={`/profile/${userContext.userData.username}`}>Profile</NavDropdown.Item>
-          <NavDropdown.Item href={`/submissions/${userContext.userData.username}`}>Submissions</NavDropdown.Item>
-          <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-          <NavDropdown.Divider />
           <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
         </NavDropdown>
       </div>
@@ -47,7 +43,9 @@ function HeaderRight() {
         <button className="header-button header-login-button">Login</button>
       </Link>
       <Link to={{ pathname: "/login", state: { method: "signup" } }}>
-        <button className="header-button header-register-button">Sign up</button>
+        <button className="header-button header-register-button">
+          Sign up
+        </button>
       </Link>
     </Nav>
   );

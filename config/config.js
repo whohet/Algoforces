@@ -8,7 +8,7 @@ if (env == "production") {
   SERVER_URL = process.env.SERVER_URL;
 } else {
   CLIENT_URL = "http://localhost:3000";
-  SERVER_URL = "http://localhost:5000";
+  SERVER_URL = "http://localhost:5555";
 }
 
 module.exports = { CLIENT_URL, SERVER_URL };
