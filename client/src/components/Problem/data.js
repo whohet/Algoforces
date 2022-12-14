@@ -38,7 +38,7 @@ int main() {
 export const JAVA_DATA = {
   label: "Java",
   code: `public class Solution {
-    public static int main(String[] args) {
+    public static void main(String[] args) {
       
     }
 }
