@@ -17,12 +17,16 @@ router.get("/getProblemsList", async (req, res) => {
         problemId: 1,
         problemName: 1,
         "published.config": 1,
+        solvedCount: 1,
+        totalSubmissions: 1,
       }
     );
     problemsList = JSON.parse(JSON.stringify(problemsList));
     for (let i = 0; i < problemsList.length; i++) {
-      problemsList[i].solve = 3 + i;
-      problemsList[i].acceptance = 94.46 - i * 10;
+      if (problemsList[i].totalSubmissions >= 1)
+        problemsList[i].acceptance =
+          (problemsList[i].solvedCount / problemsList[i].totalSubmissions) * 100;
+      else problemsList[i].acceptance = 0;
     }
     return res.status(200).json({
       success: true,
@@ -88,7 +92,7 @@ const complieAndRunHelper = async (program) => {
 
 router.post("/compileAndRun", userAuth, async (req, res) => {
   try {
-    //prepare
+    // Prepare
     let verdictName = "ac";
     let verdictLabel = "Accepted!";
     const problemId = req.body.problemId;
@@ -106,20 +110,21 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
       language = "python3";
       versionIndex = 4;
     }
-    //fetch
-    const problem = await Problem.findOne(
+    // Fetch
+    let problem = await Problem.findOne(
       {
         problemId: problemId,
         isPublished: true,
       },
       {
-        _id: 0,
         "published.testcases": 1,
         "published.config": 1,
         "published.checkerCode": 1,
+        solvedCount: 1,
+        totalSubmissions: 1,
       }
     );
-    //for each test case
+    // For each test case
     problemJSON = JSON.parse(JSON.stringify(problem));
     const timeLimit = problemJSON.published.config.timelimit / 1000;
     const memoryLimit = problemJSON.published.config.memorylimit * 1000;
@@ -194,6 +199,12 @@ router.post("/compileAndRun", userAuth, async (req, res) => {
         memory: maxMemory,
       });
       submission = await submission.save();
+
+      if (verdictName == "ac") {
+        problem.solvedCount += 1;
+      }
+      problem.totalSubmissions += 1;
+      await problem.save();
 
       const user = await User.findById(req.session.passport.user._id);
       if (verdictName === "ac") {

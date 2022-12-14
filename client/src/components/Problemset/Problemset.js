@@ -42,13 +42,13 @@ function Problemset() {
         filter: "text",
       },
       {
-        Header: "Acceptance",
+        Header: "Acceptance (%)",
         accessor: "acceptance",
         disableFilters: true,
       },
       {
-        Header: "Solve",
-        accessor: "solve",
+        Header: "Solve Count",
+        accessor: "solvedCount",
         disableFilters: true,
       },
       {

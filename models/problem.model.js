@@ -116,6 +116,14 @@ const problemSchema = new mongoose.Schema(
         time: Number,
       },
     ],
+    solvedCount: {
+      type: Number,
+      default: 0,
+    },
+    totalSubmissions: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
