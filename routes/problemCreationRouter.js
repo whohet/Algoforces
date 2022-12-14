@@ -64,8 +64,18 @@ router.post("/create", userAuth, async (req, res) => {
           tags: [],
         },
       };
+      const counterRes = await Counter.findByIdAndUpdate(
+        {
+          _id: "problemId",
+        },
+        {
+          $inc: { seq: 1 },
+        }
+      );
+      let problemId = counterRes.seq;
       let problem = new Problem({
         author: userId,
+        problemId: problemId,
         problemName: req.body.problemName,
         saved: sampleProblemData,
         published: sampleProblemData,
@@ -85,6 +95,7 @@ router.post("/create", userAuth, async (req, res) => {
       });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       message: "Internal server error. Please try again",
@@ -149,19 +160,15 @@ router.post("/save", userAuth, async (req, res) => {
     }
   } catch (err) {
     if (err && err.codeName === "DuplicateKey") {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Problem name must be unique. Please try another name.",
-        });
-    }
-    return res
-      .status(500)
-      .json({
+      return res.status(400).json({
         success: false,
-        message: "Internal server error. Please try again.",
+        message: "Problem name must be unique. Please try another name.",
       });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error. Please try again.",
+    });
   }
 });
 
@@ -178,20 +185,7 @@ router.post("/saveandpublish", userAuth, async (req, res) => {
         problemId: 1,
       });
 
-      let problemId = -1;
-      if (problem && problem.isPublished !== true) {
-        const result = await Counter.findByIdAndUpdate(
-          {
-            _id: "problemId",
-          },
-          {
-            $inc: { seq: 1 },
-          }
-        );
-        problemId = result.seq;
-      } else {
-        problemId = problem.problemId;
-      }
+      let problemId = problem.problemId;
       const result = await Problem.findOneAndUpdate(
         {
           _id: req.body._id,
@@ -220,12 +214,10 @@ router.post("/saveandpublish", userAuth, async (req, res) => {
     }
   } catch (err) {
     if (err && err.codeName === "DuplicateKey") {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Problem name must be unique. Please try another name.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Problem name must be unique. Please try another name.",
+      });
     }
     return res
       .status(500)

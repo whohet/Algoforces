@@ -25,7 +25,8 @@ router.get("/getProblemsList", async (req, res) => {
     for (let i = 0; i < problemsList.length; i++) {
       if (problemsList[i].totalSubmissions >= 1)
         problemsList[i].acceptance =
-          (problemsList[i].solvedCount / problemsList[i].totalSubmissions) * 100;
+          (problemsList[i].solvedCount / problemsList[i].totalSubmissions) *
+          100;
       else problemsList[i].acceptance = 0;
     }
     return res.status(200).json({
