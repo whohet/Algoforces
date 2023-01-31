@@ -24,7 +24,7 @@
 <br />
 <p align="center">
   <a href="">
-    <img src="images/logo.png" alt="Logo" width="160" height="80">
+    <img src="https://ibb.co/N9CPBsW" alt="Logo" width="160" height="80">
   </a>
 
   <h3 align="center">Algoforces</h3>
