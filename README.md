@@ -33,7 +33,7 @@
     <a href="https://github.com/whohet/Algoforces/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/whohet/Algoforces/">View Demo</a>
+    <a href="https://algoforces.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/whohet/Algoforces/issues">Report Bug</a>
     ·
