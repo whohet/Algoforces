@@ -5,6 +5,7 @@ You can contribute to this repo in any of the following ways
 * You can improve the code quality, add test cases, debug, etc.
 * You can work upon issues already created.
 * You can create issues, and label them correctly, if you find any.
+* You can suggest and/or create new features.
 
 ## :books: Documentation Contributions
 * You can improve the readme and contributing documentation
